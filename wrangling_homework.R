@@ -15,12 +15,12 @@ library(janitor)
 files <- c("data_raw/101.txt", "data_raw/102.txt", "data_raw/103.txt", "data_raw/104.txt")
 ds <- vroom(files, id = "file", delim = " ", skip = 6) 
 ds <- ds %>% mutate(porY = porY * 1.33) # scaling x and y to the same coordinates
+ds <- ds %>% separate(file, into = c(NA,NA,"id",NA))
 
 ### Question 1 ---------- 
 
-#Vroom read in our four data files, but we need to extract the ids (101, 102, 103, 104) from the file names
-#Use 'separate' to create a column called id that just has the id numbers
-#Convert id to a numeric variable
+#Check what kind of variable id is. 
+#Then, convert it to a numeric
 
 #ANSWER
 
