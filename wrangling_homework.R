@@ -16,7 +16,8 @@ files <- c("data_raw/101.txt", "data_raw/102.txt", "data_raw/103.txt", "data_raw
 ds <- vroom(files, id = "file", delim = " ", skip = 6) 
 ds <- ds %>% mutate(porY = porY * 1.33) # scaling x and y to the same coordinates
 ds <- ds %>% separate(file, into = c(NA,NA,"id",NA))
-
+ds <- ds %>% rename_with(make_clean_names)
+  
 ### Question 1 ---------- 
 
 #Check what kind of variable id is. 
@@ -28,9 +29,7 @@ ds <- ds %>% separate(file, into = c(NA,NA,"id",NA))
 ### Question 2 ---------- 
 
 #Before we do anything else, let's make the variable names easier to type
-#Rename sceneQTtime(d:h:m:s.tv/ts) and porQTtime(d:h:m:s.tv/ts) to scene_time and por_time
-#Hint: you will need to use backticks around the messy, original names
-#Then, use make_clean_names from the janitor package to convert everything to snake_case
+#Rename scene_q_ttime... and por_q_ttime... to scene_time and por_time
 
 #ANSWER
 
@@ -56,7 +55,7 @@ ds <- ds %>% separate(file, into = c(NA,NA,"id",NA))
 #por_x and por_y values should be between 0 and 640
 #set por_x and por_y values outside that range to be NA 
 #I've given you an "out_of_bounds" function to make this easier, 
-#but you can do it without it if you prefer
+#but you can do it with two if_else statements instead
 
 out_of_bounds <- function(x) {ifelse(x < 0 | x > 640, NA, x)}
 
